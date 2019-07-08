@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    <h1 th:text="${inid.title}"></h1>
+    发表于：<span th:text="${inid.reportTime}"></span>
+    <p th:text="${inid.content}"></p>
+
+    <h2>读者回应：</h2>
+
+    <tr th:each="re: *{reid}">
+
+                  <td th:text="${re.replyTime}"><td>
+        <br/>
+            发表于：<td th:text="${re.content}"></td>
+    </tr>
+
+            <h3>快捷回复,(字数200字以内)</h3>
+            <input type="text" id="repys" name="content">
+            <input onclick="a()" type="button" value="提交">
+
+    <br/><a href="/">返回首页</a>
+
+    <script th:inline="javascript">
+        function a() {
+            var repys=document.getElementById("repys").value;
+            var id=[[${inid.id}]];
+            window.location.href="/add?id="+id+"&content="+repys;
+        }
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--这个文件称作映射文件，每一个接口都对应一个映射文件-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.InformationMapper">
+
+
+    <resultMap id="informationResultMap" type="information">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="replyCount" column="replyCount"/>
+        <result property="viewCount" column="viewCount"/>
+        <result property="reportTime" column="reportTime"/>
+        <result property="lastPostTime" column="lastPostTime"/>
+    </resultMap>
+
+
+    <select id="INFORMATIONfindAll" resultMap="informationResultMap">
+        select id,title,replyCount,viewCount,reportTime,lastPostTime from information
+    </select>
+
+
+    <select id="INFORMATIONfindById" resultMap="informationResultMap" parameterType="java.lang.Integer">
+        select * from information where id=#{id}
+    </select>
+
+    <update id="InFORMATIONupdate" parameterType="com.example.demo.domain.Information">
+        update information set replyCount=replyCount + 1 ,lastPostTime = #{lastPostTime} where id = #{id}
+    </update>
+
+</mapper>
